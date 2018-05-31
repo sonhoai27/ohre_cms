@@ -1,0 +1,17 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+<Files .htaccess>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files *.php>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files index.php>
+Order Deny,Allow
+Allow from all
+</Files>
