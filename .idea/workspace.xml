@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c4cfec9-1b78-4752-a0c3-41aca2d99352" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/controllers/category.controller.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/categories/category.menu.view.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/constant/URL.php" afterPath="$PROJECT_DIR$/constant/URL.php" />
-      <change beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="$PROJECT_DIR$/public/css/custom.css" />
-      <change beforePath="$PROJECT_DIR$/views/assets/foot.view.php" afterPath="$PROJECT_DIR$/views/assets/foot.view.php" />
-      <change beforePath="$PROJECT_DIR$/views/assets/side.nav.menu.php" afterPath="$PROJECT_DIR$/views/assets/side.nav.menu.php" />
-      <change beforePath="$PROJECT_DIR$/views/index.view.php" afterPath="$PROJECT_DIR$/views/index.view.php" />
+      <change beforePath="$PROJECT_DIR$/views/categories/category.menu.view.php" afterPath="$PROJECT_DIR$/views/categories/category.menu.view.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,11 +37,11 @@
       <file leaf-file-name="category.menu.view.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/categories/category.menu.view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="16" column="67" lean-forward="false" selection-start-line="16" selection-start-column="67" selection-end-line="16" selection-end-column="67" />
+            <state relative-caret-position="255">
+              <caret line="32" column="102" lean-forward="false" selection-start-line="32" selection-start-column="102" selection-end-line="32" selection-end-column="102" />
               <folding>
                 <element signature="n#div#1;n#!!top" expanded="false" />
-                <element signature="e#4478#4485#1#HTML" expanded="true" />
+                <element signature="e#5161#5168#1#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -322,12 +316,12 @@
       <workItem from="1527694208543" duration="6215000" />
       <workItem from="1527736640807" duration="6530000" />
       <workItem from="1527836468158" duration="4196000" />
-      <workItem from="1527850270831" duration="3223000" />
+      <workItem from="1527850270831" duration="3570000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32423000" />
+    <option name="totallyTimeSpent" value="32770000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -686,11 +680,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/categories/category.menu.view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="67" lean-forward="false" selection-start-line="16" selection-start-column="67" selection-end-line="16" selection-end-column="67" />
+        <state relative-caret-position="255">
+          <caret line="32" column="102" lean-forward="false" selection-start-line="32" selection-start-column="102" selection-end-line="32" selection-end-column="102" />
           <folding>
             <element signature="n#div#1;n#!!top" expanded="false" />
-            <element signature="e#4478#4485#1#HTML" expanded="true" />
+            <element signature="e#5161#5168#1#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

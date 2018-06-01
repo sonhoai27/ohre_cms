@@ -24,7 +24,13 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <div class="float-md-right">
                     <div class="card float-right">
                         <div class="card-body tool-bar-action">
-                            <a data-toggle="modal" data-target="#add-new-menu" class="item" href="#"><i class="la la-calendar-check-o"></i> Thêm mới</a>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm menu" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-sm" type="button">Tìm</button>
+                                </div>
+                            </div>
+                            <a data-toggle="modal" data-target="#add-new-menu" class="item text-center" href="#"><i class="la la-calendar-check-o"></i> Thêm mới</a>
                         </div>
                     </div>
                 </div>
@@ -55,8 +61,10 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                     <td>Otto</td>
                                     <td>@mdo</td>
                                     <td>
-                                        <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1"><i class="icon-note"></i></button>
-                                        <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1"><i class="icon-note"></i></button>
+                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,8 +73,10 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                     <td>Otto</td>
                                     <td>@TwBootstrap</td>
                                     <td>
-                                        <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1"><i class="icon-note"></i></button>
-                                        <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1"><i class="icon-note"></i></button>
+                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
