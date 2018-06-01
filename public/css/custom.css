@@ -1,0 +1,21 @@
+.tool-bar-action {
+    display: flex;
+    padding: 0!important;
+}
+.tool-bar-action .item {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    clear: both;
+    font-weight: 400;
+    color: #2A2E30;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.tool-bar-action .item:hover, .tool-bar-action .item:focus {
+    color: #1e2122;
+    text-decoration: none;
+    background-color: #F9FAFD;
+}

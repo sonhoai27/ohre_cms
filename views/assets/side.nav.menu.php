@@ -15,8 +15,8 @@
             </ul>
         </div>
         <div class="navbar-container content">
-            <div class="collapse navbar-collapse" id="navbar-mobile">
-                <ul class="nav navbar-nav float-right">
+            <div class="collapse navbar-collapse float-right" id="navbar-mobile">
+                <ul class="nav navbar-nav">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">Hello,
@@ -25,10 +25,8 @@
                             <span class="avatar avatar-online">
                   <img src="<?=BASE_URL?>public/images/index/avatar.png" alt="avatar"><i></i></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a>
-                            <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>
-                            <a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a>
-                            <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ft-user"></i> Tài khoản</a>
+                            <a class="dropdown-item" href="#"><i class="ft-mail"></i> Thông báo</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-power"></i> Thoát</a>
                         </div>
                     </li>
@@ -41,25 +39,47 @@
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a href="<?=BASE_URL?>"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Trang chủ</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
+            <li class=" nav-item"><a href="<?=BASE_URL?>"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Trang chủ</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="la la-film"></i><span class="menu-title" data-i18n="nav.timelines.main">Timelines</span></a>
+            <li class=" nav-item"><a href="#"><i class="ft ft-box"></i><span class="menu-title" data-i18n="nav.timelines.main">Danh mục</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">Timelines Center</a>
+                    <li><a class="menu-item" href="<?=CATEGORY_MENU?>" data-i18n="nav.timelines.timeline_center">Menu</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Timelines Left</a>
+                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Shops</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-right.html" data-i18n="nav.timelines.timeline_right">Timelines Right</a>
+                    <li><a class="menu-item" href="timeline-right.html" data-i18n="nav.timelines.timeline_right">Brands</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-horizontal.html" data-i18n="nav.timelines.timeline_horizontal">Timelines Horizontal</a>
+                    <li><a class="menu-item" href="timeline-horizontal.html" data-i18n="nav.timelines.timeline_horizontal">Status</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item"><a href="#"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Tài khoản</span></a>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">User</a>
+                    </li>
+                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Anonymous User</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item"><a href="#"><i class="ft ft-package"></i><span class="menu-title" data-i18n="nav.timelines.main">Sản phẩm</span></a>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">Config</a>
+                    </li>
+                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Crawler</a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item"><a href="#"><i class="ft ft-bar-chart"></i><span class="menu-title" data-i18n="nav.timelines.main">Thống kê</span></a>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">Sản phẩm</a>
+                    </li>
+                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Tất cả</a>
                     </li>
                 </ul>
             </li>
             <li class=" navigation-header">
-                <span data-i18n="nav.category.support">Support</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
+                <span data-i18n="nav.category.support">Trợ giúp</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
                                                                         data-placement="right" data-original-title="Support"></i>
-            </li>
-            <li class=" nav-item"><a href="http://support.pixinvent.com/"><i class="la la-support"></i><span class="menu-title" data-i18n="nav.support_raise_support.main">Raise Support</span></a>
             </li>
             <li class=" nav-item">
                 <a href="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/documentation"><i class="la la-text-height"></i>
