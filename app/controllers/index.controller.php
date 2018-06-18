@@ -1,20 +1,36 @@
 <?php
-class indexController extends BaseController {
 
-    function __construct(){
+class indexController extends BaseController
+{
+
+    function __construct()
+    {
         parent::__construct();
-        if(isset($_SESSION['token'])){
-            $this->redirect("auth", "login");
-        }
+        $this->checkLogin();
     }
+
     //overidde method abstract
     function index()
     {
-        $this->view->show("index");
+        $this->view->render("index");
         $this->renderView("main", "footer");
     }
 
-    function about(){
+    function upload_file()
+    {
+        global $post;
+        print_r($post->sendFile($_FILES, array(
+            "hello" => "SOn Hoai"
+        )));
+    }
+
+    function about()
+    {
         echo "about";
+    }
+
+    function chat()
+    {
+
     }
 }

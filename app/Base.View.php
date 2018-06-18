@@ -17,7 +17,7 @@ class BaseView
         return self::$instance;
     }
 
-    public function show($name){
+    public function render($name){
         $file = __SITE_PATH."/views/".$name.".view.php";
         if(!file_exists($file)){
             throw new Exception("Not found view ".$name);
@@ -27,6 +27,7 @@ class BaseView
         {
             $$key = $value; //chuyển 1 $key thành 1 biến
         }
-        include ($file);
+        include_once ($file);
     }
+
 }

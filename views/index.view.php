@@ -120,9 +120,16 @@ $BODY_CLASS = 'class="vertical-layout vertical-menu-modern 2-columns   menu-expa
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <input type="file" name="file" id="file">
+                            <button onclick="uploadFile()">Tải</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
 </div>

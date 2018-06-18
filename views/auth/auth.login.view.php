@@ -22,16 +22,16 @@ require_once (__SITE_PATH."/views/assets/head.view.php");
                             </div>
                             <div class="card-content">
                                 <div class="card-body pt-0">
-                                    <form class="form-horizontal" action="index.html" novalidate>
+                                    <form class="form-horizontal" action="<?=BASE_URL?>auth/login_handle" novalidate method="post">
                                         <fieldset class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control input-lg" id="user-name" placeholder="Your Username"
+                                            <input type="text" class="form-control input-lg" id="email" name="email" placeholder="Your Username"
                                                    required>
                                             <div class="form-control-position">
                                                 <i class="la la-user"></i>
                                             </div>
                                         </fieldset>
                                         <fieldset class="form-group position-relative has-icon-left">
-                                            <input type="password" class="form-control input-lg" id="user-password" placeholder="Enter Password"
+                                            <input type="password" class="form-control input-lg" id="password" name="password" placeholder="Enter Password"
                                                    required>
                                             <div class="form-control-position">
                                                 <i class="la la-key"></i>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 Abstract class BaseController
 {
     protected $model;
@@ -43,6 +44,22 @@ Abstract class BaseController
         }
         else{
             exit(header("Location: ".BASE_URL.$controller."/".$name));
+        }
+    }
+    function checkLogin(){
+        if(!$this->checkToken()){
+            $this->redirect("auth", 'login');
+        }
+    }
+    function checkToken(){
+        if(!isset($_SESSION['user_token'])){
+            return false;
+        }else {
+            if(json_decode($this->model->get("account")->checkToken($_SESSION['user_token']))->message == "OK"){
+                return true;
+            }else {
+                return false;
+            }
         }
     }
     abstract function index();

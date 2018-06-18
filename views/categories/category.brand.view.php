@@ -8,13 +8,13 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                <h3 class="content-header-title mb-0 d-inline-block">Menu</h3>
+                <h3 class="content-header-title mb-0 d-inline-block">Brand</h3>
                 <div class="row breadcrumbs-top d-inline-block">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Danh Mục</a>
                             </li>
-                            <li class="breadcrumb-item active">Menu
+                            <li class="breadcrumb-item active">Brand
                             </li>
                         </ol>
                     </div>
@@ -103,7 +103,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
     </div>
 </div>
 
-<div class="modal fade text-left" id="add-new-menu" role="dialog" aria-labelledby="myModalLabel17"
+<div class="modal fade text-left" id="add-new-menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
      aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -116,48 +116,28 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
             <div class="modal-body">
                 <div class="form-group">
                     <label for="userinput1">Tên Menu</label>
-                    <input type="text" id="category_name" class="form-control border-primary" onkeyup="makeAlias('category_name','category_alias')" placeholder="Name" name="name">
+                    <input type="text" id="userinput1" class="form-control border-primary" placeholder="Name" name="name">
                 </div>
                 <div class="form-group">
-                    <label for="userinput1">Alias Menu</label>
-                    <input type="text" class="form-control" id="category_alias" placeholder="Địa chỉ menu">
-                </div>
-                <div class="form-group">
-                    <label for="category_parent_id">Chọn Item Cha</label>
-                    <select class="select2  form-control" id="category_parent_id" style="width: 100%!important;">
-                        <option value="0">--| Không có</option>
-                        <?php
-                            foreach ($menus as $item){?>
-                                <option value="<?=$item->category_id?>"><?=$item->category_name?></option>
-                            <?php }
-                        ?>
+                    <label for="userinput1">Chọn Item Cha</label>
+                    <select class="form-control" id="basicSelect">
+                        <option>Select Option</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                        <option>Option 4</option>
+                        <option>Option 5</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="userinput1">Địa chỉ</label>
+                    <input type="text" class="form-control" id="predefinedInput" placeholder="Địa chỉ menu">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline-primary" onclick="addNewCategory()">Save changes</button>
+                <button type="button" class="btn btn-outline-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-<script>
-    function addNewCategory() {
-        var form = {
-            category_alias: $("#category_alias").val(),
-            category_name: $("#category_name").val(),
-            category_parent_id: $("#category_parent_id").val(),
-        }
-        $.post('<?=CATEGORY_MENU_ADD?>', form, function (data) {
-            var result = JSON.parse(data)
-            if(result.status == 200){
-                toastr.success('Thành công!', 'Thêm '+$("#category_name").val()+" thành công",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
-                setTimeout(function () {
-                    window.location = "<?=CATEGORY_MENU?>"
-                },2000)
-            }else {
-                toastr.error('Lỗi.', 'Có lỗi trong quá trình thêm: '+ data.toString());
-            }
-        })
-    }
-</script>

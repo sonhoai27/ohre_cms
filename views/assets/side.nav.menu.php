@@ -43,13 +43,19 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="ft ft-box"></i><span class="menu-title" data-i18n="nav.timelines.main">Danh mục</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="<?=CATEGORY_MENU?>" data-i18n="nav.timelines.timeline_center">Menu</a>
+                    <li><a href="#"><span class="menu-title" data-i18n="nav.timelines.main">Danh mục sản phẩm</span></a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="<?=CATEGORY_BRAND?>" data-i18n="nav.timelines.timeline_right">Hãng</a>
+                            <li><a class="menu-item" href="<?=CATEGORY_GROUP?>" data-i18n="nav.timelines.timeline_center">Loại - nhóm</a>
+                            </li>
+                            <li><a class="menu-item" href="<?=CATEGORY_MENU?>" data-i18n="nav.timelines.timeline_left">Danh mục</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Shops</a>
+                    <li><a class="menu-item" href="<?=CATEGORY_SHOP?>" data-i18n="nav.timelines.timeline_left">Cửa hàng</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-right.html" data-i18n="nav.timelines.timeline_right">Brands</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-horizontal.html" data-i18n="nav.timelines.timeline_horizontal">Status</a>
+                    <li><a class="menu-item" href="<?=CATEGORY_STATUS?>" data-i18n="nav.timelines.timeline_horizontal">Trạng thái</a>
                     </li>
                 </ul>
             </li>
@@ -63,9 +69,9 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="ft ft-package"></i><span class="menu-title" data-i18n="nav.timelines.main">Sản phẩm</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">Config</a>
+                    <li><a class="menu-item" href="<?=PRODUCTS_PRODUCT?>" data-i18n="nav.timelines.timeline_center">Crawler sản phẩm</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Crawler</a>
+                    <li><a class="menu-item" href="<?=PRODUCTS_GROUP?>" data-i18n="nav.timelines.timeline_left">Nhóm sản phẩm</a>
                     </li>
                 </ul>
             </li>

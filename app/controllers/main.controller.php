@@ -7,6 +7,6 @@ class mainController extends BaseController{
         // TODO: Implement index() method.
     }
     function footer(){
-        $this->view->show("assets/foot");
+        $this->view->render("assets/foot");
     }
 }

@@ -34,4 +34,18 @@ class Get{
         return json_decode($output);
         curl_close($ch);
     }
+    function normal_get($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'access_token: aaaaaaaa'
+            )
+        );
+        $output = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        return json_decode($output);
+        curl_close($ch);
+    }
 }

@@ -25,6 +25,9 @@
 <!-- END MODERN JS-->
 <!-- BEGIN PAGE LEVEL JS-->
 <script src="<?=BASE_URL?>public/app-assets/js/scripts/pages/dashboard-sales.js" type="text/javascript"></script>
-
+<script src="<?=BASE_URL?>public/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
+<script src="<?=BASE_URL?>public/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
+<script src="<?=BASE_URL?>public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+<script src="<?=BASE_URL?>public/js/custom.js" type="text/javascript"></script>
 </body>
 </html>
