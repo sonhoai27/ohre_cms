@@ -4,40 +4,57 @@ class authController extends BaseController{
     function __construct()
     {
         parent::__construct();
-        if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
-            $this->redirect("index");
-        }
     }
 
     //controller view
     function index()
     {
-        // TODO: Implement index() method.
-        global $get;
-        $params = array(
-            "AAAAAA"
-        );
-        print_r($get->explore_get("http://localhost:4000/api/v1/auth/token", $params));
+        $this->redirect("auth", "account");
     }
 
     function login(){
-        $this->view->render("auth/auth.login");
-        $this->renderView("main", "footer");
+        if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
+            $this->redirect("index");
+        }else {
+            $this->view->render("auth/auth.login");
+            $this->renderView("main", "footer");
+        }
+
     }
     function register(){
-        $this->view->render("auth/auth.register");
-        $this->renderView("main", "footer");
+        if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
+            $this->redirect("index");
+        }else {
+            $this->view->render("auth/auth.register");
+            $this->renderView("main", "footer");
+        }
+
     }
 
+    function check_mail(){
+        $this->view->render("auth/auth.active-account");
+    }
     function recover_password(){
-        $this->view->render("auth/auth.recover-password");
-        $this->renderView("main", "footer");
+        if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
+            $this->redirect("index");
+        }else {
+            $this->view->render("auth/auth.recover-password");
+            $this->renderView("main", "footer");
+        }
     }
 
-    //controller xy ly, dat den tuan theo
+    function logout(){
+        if(isset($_SESSION['user_token'])){
+            unset($_SESSION['user_token']);
+            $this->redirect("auth","login");
+        }else {
+            $this->redirect("auth","login");
+        }
+    }
+        //controller xy ly, dat den tuan theo
     // name controller + handle
     function login_handle(){
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['user_token'])){
             if($_POST['email'] != null && $_POST['password'] !=null){
                 $userInfo = json_decode(file_get_contents('http://ip-api.io/api/json'));
                 $resLogin = json_decode($this->model->get("account")->login(array(
@@ -69,8 +86,31 @@ class authController extends BaseController{
         }
     }
 
-    function location_handle(){
-        global $get;
-        print_r($get->normal_get("http://freegeoip.net/json/"));
+    function register_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $resLogin = json_decode($this->model->get("account")->register(array(
+                "email"=>$_POST['email'],
+                "password"=>$_POST['password']
+            )));
+            if(strcmp("OK",$resLogin->message )==0){
+                $this->redirect("auth", "check-mail");
+            }else {
+                echo "ERROR, Please check your activity";
+            }
+        }
     }
+    function active_account($args = array()){
+       if($args){
+           $resActive = ($this->model->get("account")->activeAccount($args[1],$args[2]));
+           if(strcmp("OK",$resActive->message )==0){
+               $_SESSION['user_token'] = $resActive->token;
+               $this->redirect("index");
+           }else {
+               echo "ERROR, Please check your activity";
+           }
+       }else {
+           $this->redirect("auth","login");
+       }
+    }
+
 }

@@ -14,7 +14,7 @@ require_once (__SITE_PATH."/views/assets/head.view.php");
                         <div class="card border-grey border-lighten-3 m-0">
                             <div class="card-header border-0">
                                 <div class="card-title text-center">
-                                    <img src="../../../app-assets/images/logo/logo-dark.png" alt="branding logo">
+                                    <img src="<?=BASE_URL?>public/images/cdn/ohre.png" alt="branding logo" width="20%">
                                 </div>
                                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                                     <span>Easily Using</span>
@@ -42,7 +42,7 @@ require_once (__SITE_PATH."/views/assets/head.view.php");
                                 </div>
                                 <div class="card-body pb-0">
                                     <p class="text-center"><a href="<?=BASE_URL?>auth/recover-password" class="card-link">Recover password</a></p>
-                                    <p class="text-center">New to Modern Admin? <a href="register-with-navbar.html" class="card-link">Create Account</a></p>
+                                    <p class="text-center">New to Modern Admin? <a href="<?=BASE_URL?>auth/register" class="card-link">Create Account</a></p>
                                 </div>
                             </div>
                         </div>

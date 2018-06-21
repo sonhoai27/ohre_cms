@@ -3,6 +3,7 @@ class categoryController extends BaseController{
 
     function index()
     {
+        $this->checkLogin();
         $this->redirect("category", "menu");
     }
 

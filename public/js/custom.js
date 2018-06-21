@@ -32,3 +32,39 @@ $('#productDetail').on('hidden.bs.modal', function () {
     var modal = $(this)
     modal.find("#child-product-content").remove()
 })
+var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
+function searchProductForGroup(){
+    delay(function(){
+        $.post(BASE_URL+"products/search_product_handle", {keyword: $("#product_name").val(), idGroup: $("#id-product-group").data("id")}, function (dataSearch) {
+            if(dataSearch !== ""){
+                toastr.success('Thành công!', 'Tìm sản phẩm với keyword '+$("#product_name").val()+" thành công.",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
+                $("#img-search-product-group").remove()
+                $("#myDataTable").remove()
+                $("#myDataTable_wrapper").remove()
+                $("#dataTableGroupSearchProduct").append('<table class="table table-striped table-bordered display" id="myDataTable" style="width:100%"></table>')
+                $('#myDataTable').DataTable({
+                    data: JSON.parse(dataSearch),
+                    columns: [
+                        { title: "Tên" },
+                        { title: "Giá" },
+                        { title: "Cửa hàng" }
+                    ]
+                });
+                $("#myDataTable_length").remove()
+                $("#myDataTable_filter").css({
+                    float: 'right'
+                })
+            }else {
+                $("#myDataTable").remove()
+                $("#dataTableGroupSearchProduct").html('<img src="'+BASE_URL+'public/images/cdn/empty_state.png" alt="" id="img-search-product-group" class="img-fluid" style="display: block;margin: auto">')
+            }
+        })
+    }, 1000)
+}

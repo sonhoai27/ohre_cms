@@ -3,7 +3,7 @@ class ProductsController extends BaseController {
 
     function index()
     {
-        // TODO: Implement index() method.
+        $this->checkLogin();
     }
 
     function product(){
@@ -23,8 +23,22 @@ class ProductsController extends BaseController {
     }
 
     function group(){
+        $model = $this->model;
+        $this->view->data['status']= $model->get("status")->getStatus();
+        $this->view->data['groups']= $model->get("product")->groups();
         $this->view->render("products/products.group");
         $this->renderView("main", "footer");
+    }
+    function detail_group($args){
+        if(isset($args[1])){
+            $this->view->data['detailGroup'] = $this->model->get("product")->detailGroup($args[1]);
+            $this->view->render("products/products.detail-group");
+            $this->renderView("main", "footer");
+        }else {
+            print_r(json_encode(array(
+                "status"=>403
+            )));
+        }
     }
     function detail_handle(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -83,5 +97,79 @@ class ProductsController extends BaseController {
         }
 
         return $colProduct;
+    }
+
+    function add_group_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST != null){
+                $resGroup = ($this->model->get("product")->addGroup(array(
+                    "group_product_name"=>$_POST['group_name'],
+                    "group_product_alias"=>$_POST['group_alias'],
+                    "group_product_status"=>$_POST['group_status']
+                )));
+                if(strcmp("OK",$resGroup->message )==0){
+                    $this->redirect("products", "group");
+                }else {
+                    echo "ERROR, Please check your activity";
+                }
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
+    }
+    function search_product_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST != null){
+                $convertArray = array();
+                $resultSearch = $this->model->get("product")->searchProduct($_POST['keyword'], $_POST['idGroup']);
+                if($resultSearch!=""){
+                    foreach ($resultSearch as $item){
+                        array_push($convertArray, array(
+                            "<a style='text-decoration: ".($item->detail_gp_id != null ? 'line-through' : 'unset')."' data-click='".($item->detail_gp_id != null ? 'on' : 'off')."' id='data-id-".$item->product_id."' onclick='addToGroup(".$item->product_id.")'>".$item->product_name."</a>",
+                            $item->product_price,
+                            $item->shop_name
+                        ));
+                    }
+                    print_r(json_encode($convertArray));
+                }else{
+                    print_r("");
+                }
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
+    }
+    function add_product_group_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST != null){
+                print_r(json_encode($this->model->get("product")->addProductGroup(array(
+                    "detail_gp_group_product_id"=>$_POST['idGroup'],
+                    "detail_gp_product_id"=>$_POST['idProduct']
+                ))));
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
+    }
+    function delete_product_group_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST != null){
+                print_r(json_encode($this->model->get("product")->deleteProductGroup($_POST['idGroup'], $_POST['idProduct'])));
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
     }
 }

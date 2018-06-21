@@ -10,4 +10,12 @@ class AccountModel extends BaseModel{
             "access_token: ".$token
         ), API_CHECK_TOKEN);
     }
+    function register($form){
+        global $post;
+        return $post->send($form, API."auth/register");
+    }
+    function activeAccount($email, $key){
+        global $get;
+        return $get->explore_get(API."auth/active-account",[$email, $key]);
+    }
 }

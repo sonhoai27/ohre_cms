@@ -15,7 +15,7 @@ require_once (__SITE_PATH."/views/assets/head.view.php");
                         <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
                             <div class="card-header border-0 pb-0">
                                 <div class="card-title text-center">
-                                    <img src="../../../app-assets/images/logo/logo-dark.png" alt="branding logo">
+                                    <img src="<?=BASE_URL?>public/images/cdn/ohre.png" alt="branding logo" width="20%">
                                 </div>
                                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                                     <span>Easily Using</span>
@@ -23,18 +23,14 @@ require_once (__SITE_PATH."/views/assets/head.view.php");
                             </div>
                             <div class="card-content">
                                 <div class="card-body pt-0">
-                                    <form class="form-horizontal" action="index.html">
-                                        <fieldset class="form-group floating-label-form-group">
-                                            <label for="user-name">User Name</label>
-                                            <input type="text" class="form-control" id="user-name" placeholder="User Name">
-                                        </fieldset>
+                                    <form class="form-horizontal" action="<?=BASE_URL?>auth/register_handle" method="post">
                                         <fieldset class="form-group floating-label-form-group">
                                             <label for="user-email">Your Email Address</label>
-                                            <input type="email" class="form-control" id="user-email" placeholder="Your Email Address">
+                                            <input type="email" name="email" class="form-control" id="user-email" placeholder="Your Email Address">
                                         </fieldset>
                                         <fieldset class="form-group floating-label-form-group mb-1">
                                             <label for="user-password">Enter Password</label>
-                                            <input type="password" class="form-control" id="user-password" placeholder="Enter Password">
+                                            <input type="password" name="password" class="form-control" id="user-password" placeholder="Enter Password">
                                         </fieldset>
                                         <div class="form-group row">
                                             <div class="col-12 float-sm-left text-left"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
@@ -53,3 +49,6 @@ require_once (__SITE_PATH."/views/assets/head.view.php");
         </div>
     </div>
 </div>
+<script>
+
+</script>

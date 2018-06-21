@@ -27,7 +27,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ft-user"></i> Tài khoản</a>
                             <a class="dropdown-item" href="#"><i class="ft-mail"></i> Thông báo</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-power"></i> Thoát</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="<?=BASE_URL?>auth/logout"><i class="ft-power"></i> Thoát</a>
                         </div>
                     </li>
                 </ul>

@@ -21,6 +21,14 @@ define("API_CATEGORY_ALL", API."menu/all");
 define("API_CATEGORY", API."menu");
 define("API_CATEGORY_CHILD", API."menu/child");
 
+
+//group api
+define("GROUP_ADD", API."product/group/add");
+define("GROUP_DETAIL", API."product/group");
+define("API_GROUP_ALL", API."product/group/all");
+define("API_GROUP_PRODUCT_SEARCH", API."product/group/search");
+define("API_GROUP_ADD_DETAIL", API."product/group/add-detail");
+define("API_GROUP_DETAIL", API."product/group/product");
 //category
 
 define("CATEGORY_MENU", BASE_URL."category/menu");
