@@ -16,12 +16,13 @@ class indexController extends BaseController
         $this->renderView("main", "footer");
     }
 
-    function upload_file()
+    function load_image()
     {
-        global $post;
-        print_r($post->sendFile($_FILES, array(
-            "hello" => "SOn Hoai"
-        )));
+        if(isset($_GET['src'])){
+            resizeImage($_GET['src']);
+        }else {
+            $this->redirect("index");
+        }
     }
 
     function about()

@@ -73,6 +73,8 @@
                     </li>
                     <li><a class="menu-item" href="<?=PRODUCTS_GROUP?>" data-i18n="nav.timelines.timeline_left">Nhóm sản phẩm</a>
                     </li>
+                    <li><a class="menu-item" href="<?=PRODUCTS_CONFIG?>" data-i18n="nav.timelines.timeline_left">Cấu hình</a>
+                    </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><i class="ft ft-bar-chart"></i><span class="menu-title" data-i18n="nav.timelines.main">Thống kê</span></a>

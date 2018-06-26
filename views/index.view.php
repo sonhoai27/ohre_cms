@@ -1,6 +1,26 @@
 <?php
 $BODY_CLASS = 'class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"';
+$assetsCSS = '
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/extensions/toastr.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/plugins/extensions/toastr.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/core/colors/palette-gradient.css">
+            <link href="'.BASE_URL.'public/css/sanfrancisco-font.css" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/charts/morris.css">
+            ';
+$tempAssetsJS = '
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/charts/chart.min.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/charts/raphael-min.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/charts/morris.min.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js"
+        type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js"
+                    type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/data/jvector/visitor-data.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/js/scripts/pages/dashboard-sales.js" type="text/javascript"></script>
+            ';
+define("AssetsJS", $tempAssetsJS);
     require_once (__SITE_PATH."/views/assets/head.view.php");
     require_once (__SITE_PATH."/views/assets/side.nav.menu.php");
 ?>

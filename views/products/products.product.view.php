@@ -1,6 +1,18 @@
 <?php
 $BODY_CLASS = 'class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"';
+$assetsCSS = '
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/extensions/toastr.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/plugins/extensions/toastr.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/forms/selects/select2.min.css">
+            ';
+$tempAssetsJS = '
+           <script src="'.BASE_URL.'public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+           <script src="'.BASE_URL.'public/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
+           <script>$(".select2").select2();</script>
+           ';
+define("AssetsJS", $tempAssetsJS);
 require_once(__SITE_PATH . "/views/assets/head.view.php");
 require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
 ?>
@@ -25,9 +37,9 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                     <div class="card float-right">
                         <div class="card-body tool-bar-action">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm menu" aria-describedby="button-addon2">
+                                <input type="text" class="form-control" id="product_name" placeholder="Tìm kiếm sản phẩm" aria-describedby="button-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary btn-sm" type="button">Tìm</button>
+                                    <button class="btn btn-primary btn-sm" type="button" onclick="searchProduct()">Tìm</button>
                                 </div>
                             </div>
                             <a data-toggle="modal" data-target="#add-new-menu" class="item text-center" href="#"><i class="la la-calendar-check-o"></i> Thêm mới</a>
@@ -165,7 +177,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
             idShop: $("#shop_id").val(),
             idUser: $("#idUser").data("user-id")
         }
-        $.post('<?=PRODUCTS_PRODUCT_TGDD?>', form, function (data) {
+        $.post('<?=PRODUCTS_PRODUCT_ADAYROI?>', form, function (data) {
             if(data.status == 200){
                 toastr.success('Thành công!', 'Thêm '+$("#shop_url").val()+" thành công",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
                 setTimeout(function () {

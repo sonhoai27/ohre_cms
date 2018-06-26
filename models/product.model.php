@@ -13,9 +13,10 @@ class ProductModel extends BaseModel {
         global $post;
         return json_decode($post->send($group, GROUP_ADD));
     }
-    function groups(){
+    function groups($page){
         global $get;
-        return json_decode($get->normal_get(API_GROUP_ALL));
+        $page = ($page -1)*20;
+        return json_decode($get->explore_get(API_GROUP_ALL, [$page]));
     }
     function detailGroup($alias){
         global $get;
@@ -40,5 +41,28 @@ class ProductModel extends BaseModel {
     function deleteProductGroup($idGroup, $idProduct){
         global $delete;
         return ($delete->explore_get(API_GROUP_DETAIL, [$idGroup, $idProduct]));
+    }
+    function productsGroup($idGroup){
+        global $get;
+        return json_decode($get->explore_get(API_GROUP_DETAIL, [$idGroup]));
+    }
+    function addConfig($form){
+        global $post;
+//        return json_decode($post->send(API_PRODUCT_CONFIG, $form));
+        print_r($post->send($form,API_PRODUCT_CONFIG."/add"));
+    }
+
+    function updateConfig($form){
+        global $put;
+//        return json_decode($post->send(API_PRODUCT_CONFIG, $form));
+        print_r($put->send($form['config'],$form['nameConfig'],API_PRODUCT_CONFIG."/update"));
+    }
+    function allConfig(){
+        global $get;
+        return $get->normal_get(API_PRODUCT_CONFIG."/all");
+    }
+    function detailConfig($configName){
+        global $get;
+        return $get->explore_get(API_PRODUCT_CONFIG."/detail", [$configName]);
     }
 }

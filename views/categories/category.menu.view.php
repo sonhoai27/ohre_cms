@@ -1,6 +1,18 @@
 <?php
 $BODY_CLASS = 'class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"';
+$assetsCSS = '
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/extensions/toastr.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/plugins/extensions/toastr.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/forms/selects/select2.min.css">
+            ';
+$tempAssetsJS = '
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+            <script>$(".select2").select2();</script>
+            ';
+define("AssetsJS", $tempAssetsJS);
 require_once(__SITE_PATH . "/views/assets/head.view.php");
 require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
 ?>

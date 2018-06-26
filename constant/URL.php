@@ -24,11 +24,12 @@ define("API_CATEGORY_CHILD", API."menu/child");
 
 //group api
 define("GROUP_ADD", API."product/group/add");
-define("GROUP_DETAIL", API."product/group");
+define("GROUP_DETAIL", API."product/group/detail");
 define("API_GROUP_ALL", API."product/group/all");
 define("API_GROUP_PRODUCT_SEARCH", API."product/group/search");
 define("API_GROUP_ADD_DETAIL", API."product/group/add-detail");
 define("API_GROUP_DETAIL", API."product/group/product");
+define("API_PRODUCT_CONFIG", API."product/config");
 //category
 
 define("CATEGORY_MENU", BASE_URL."category/menu");
@@ -43,3 +44,5 @@ define("CATEGORY_GROUP", BASE_URL."category/group");
 define("PRODUCTS_PRODUCT", BASE_URL."products/product");
 define("PRODUCTS_GROUP", BASE_URL."products/group");
 define("PRODUCT_DETAIL", BASE_URL."products/detail_handle");
+define("PRODUCTS_CONFIG", BASE_URL."products/config");
+define("PRODUCTS_DETAIL_CONFIG", BASE_URL."products/detail_config");

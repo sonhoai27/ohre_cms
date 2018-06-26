@@ -1,6 +1,16 @@
 <?php
 $BODY_CLASS = 'class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"';
+$assetsCSS = '
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/forms/selects/select2.min.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/tables/datatable/datatables.min.css">
+            ';
+$tempAssetsJS = '
+           <script src="'.BASE_URL.'public/app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
+           <script src="'.BASE_URL.'public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+           <script>$(".select2").select2();</script>
+           ';
+define("AssetsJS", $tempAssetsJS);
 require_once(__SITE_PATH . "/views/assets/head.view.php");
 require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
 ?>
@@ -40,209 +50,52 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <div class="card">
                     <div class="row">
                         <div class="col-12">
-                            <div class="list-group-product" style="width: 100%">
-                                <div class="media-list list-group">
-                                    <?php
-                                    foreach ($groups as $item) {
-                                        ?>
-                                        <div class="list-group-item list-group-item-action media"
-                                             data-id="<?= $item->group_product_id ?>">
-                                            <a href="<?=BASE_URL?>products/detail-group/<?=$item->group_product_alias?>" style="display: inline-block;">
-                                                <h5 class="media-link">
-                                                    <span class="media-left">
-                                                        <img class="media-object rounded-circle"
-                                                             src="<?= BASE_URL ?>/public/images/cdn/avatar-s-11.png"
-                                                             alt="Generic placeholder image"
-                                                             style="width: 48px;height: 48px;">
-                                                    </span>
-                                                    <span class="media-body">
-                                                        <?= $item->group_product_name ?>
-                                                    </span>
-                                                </h5>
-                                            </a>
-                                        </div>
-                                    <?php }
+                            <div class="table-responsive">
+                                <?php
+                                if (count($groups) > 0) {
                                     ?>
-                                </div>
+                                    <table class="table table-bordered mb-0"
+                                           style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Hình nhóm</th>
+                                            <th>Tên nhóm</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Thiết lập</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach ($groups as $item) {
+                                            ?>
+                                            <tr id="group-id-<?= $item->group_product_id ?>">
+                                                <td>
+                                                    <img class="media-object rounded-circle"
+                                                         src="<?= BASE_URL ?>/public/images/cdn/avatar-s-11.png"
+                                                         alt="Generic placeholder image"
+                                                         style="width: 48px;height: 48px;">
+                                                </td>
+                                                <td><a href="<?=BASE_URL?>products/detail-group/<?=$item->group_product_alias?>" style="display: inline-block;"><?= $item->group_product_name ?></a></td>
+                                                <td><?= date( "d-m-Y",strtotime($item->group_product_created_date))?></td>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm"
+                                                            onclick="removeGroup(<?= $item->group_product_id ?>)">
+                                                        Xóa
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <?php }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                <?php } else { ?>
+                                    <img src="<?= BASE_URL ?>public/images/cdn/empty_state.png" alt=""
+                                         id="img-search-product-group" class="img-fluid"
+                                         style="display: block;margin: auto">
+                                <?php }
+                                ?>
                             </div>
                         </div>
-                        <!--                        <div class="col-sm-4" style="padding-left: 0;padding-right: 0">-->
-                        <!--                            <div class="list-product-of-group" style="width: 100%; overflow-y: scroll; height: 450px">-->
-                        <!--                                <div class="media-list list-group">-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                    <div class="list-group-item list-group-item-action media">-->
-                        <!--                                        <div>-->
-                        <!--                                              <span class="media-left">-->
-                        <!--                                                <img class="media-object rounded-circle"-->
-                        <!--                                                     src="-->
-                        <? //= BASE_URL ?><!--/public/images/cdn/avatar-s-11.png"-->
-                        <!--                                                     alt="Generic placeholder image" style="width: 48px;height: 48px;">-->
-                        <!--                                              </span>-->
-                        <!--                                            <span class="media-body">-->
-                        <!--                                                <h4 class="list-group-item-heading">List group item heading</h4>-->
-                        <!--                                                <span class="list-group-item-text">-->
-                        <!--                                                    Donec id elit non mi porta gravida at eget metus. Maecenas-->
-                        <!--                                                    sed diam eget risus varius blandit.-->
-                        <!--                                                </span>-->
-                        <!--                                              </span>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!---->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
             </div>

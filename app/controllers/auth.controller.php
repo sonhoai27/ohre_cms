@@ -54,7 +54,7 @@ class authController extends BaseController{
         //controller xy ly, dat den tuan theo
     // name controller + handle
     function login_handle(){
-        if($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['user_token'])){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST['email'] != null && $_POST['password'] !=null){
                 $userInfo = json_decode(file_get_contents('http://ip-api.io/api/json'));
                 $resLogin = json_decode($this->model->get("account")->login(array(

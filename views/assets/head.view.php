@@ -23,16 +23,12 @@
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/charts/morris.css">
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/fonts/simple-line-icons/style.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/extensions/toastr.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/plugins/extensions/toastr.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/forms/icheck/icheck.css">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/forms/icheck/custom.css">
-    <link href="<?=BASE_URL?>public/css/sanfrancisco-font.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/forms/selects/select2.min.css">
+    <?php
+        if((isset($assetsCSS))){
+            print_r($assetsCSS);
+        }
+    ?>
     <link href="<?=BASE_URL?>public/css/custom.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!--    <script src="--><?//=BASE_URL?><!--public/js/custom.js" type="text/javascript"></script>-->

@@ -24,14 +24,23 @@ class ProductsController extends BaseController {
 
     function group(){
         $model = $this->model;
+        $page = isset($_GET['page'])?$_GET['page'] : 1;
+
         $this->view->data['status']= $model->get("status")->getStatus();
-        $this->view->data['groups']= $model->get("product")->groups();
+
+        $responseFromAPI = $model->get("product")->groups($page);
+        $this->view->data['groups']= $responseFromAPI->groups;
+        $pg = new Pagination(20,$responseFromAPI->numRows, $page,BASE_URL."products/group");
+        $this->view->data['pagination'] = $pg->pagi();
+
         $this->view->render("products/products.group");
         $this->renderView("main", "footer");
     }
     function detail_group($args){
         if(isset($args[1])){
-            $this->view->data['detailGroup'] = $this->model->get("product")->detailGroup($args[1]);
+            $model = $this->model;
+            $this->view->data['detailGroup'] = $model->get("product")->detailGroup($args[1]);
+            $this->view->data['productsGroup'] = $model->get("product")->productsGroup($this->view->data['detailGroup']->group_product_id);
             $this->view->render("products/products.detail-group");
             $this->renderView("main", "footer");
         }else {
@@ -40,6 +49,31 @@ class ProductsController extends BaseController {
             )));
         }
     }
+
+    function config(){
+        $this->view->data['configs'] = $this->model->get("product")->allConfig();
+        $this->view->render("products/products.config");
+        $this->renderView("main", "footer");
+    }
+
+    function add_new_config(){
+        $this->view->render("products/products.new-config");
+        $this->renderView("main", "footer");
+    }
+
+    function detail_config(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST !=null){
+                print_r($this->model->get("product")->detailConfig($_POST['configName']));
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
+    }
+
     function detail_handle(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST != null){
@@ -120,7 +154,7 @@ class ProductsController extends BaseController {
             }
         }
     }
-    function search_product_handle(){
+    function search_product_group_handle(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST != null){
                 $convertArray = array();
@@ -164,6 +198,138 @@ class ProductsController extends BaseController {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST != null){
                 print_r(json_encode($this->model->get("product")->deleteProductGroup($_POST['idGroup'], $_POST['idProduct'])));
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
+    }
+
+    function add_config_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST!=null){
+                $config = array(
+                    "name"=>$_POST['name'],
+                    "method"=>$_POST['method'],
+                    "urlPost"=>NULLABLE($_POST['urlPost']),
+                    "baseurl"=>NULLABLE($_POST['baseUrl']),
+                    "dataCherrio"=>$_POST['dataCherrio'],
+                    "item_dataCherrio"=> array(
+                        "isUndefined"=> array(
+                            "bool"=>$_POST['isUndefined_bool'],
+                            "dataType"=>$_POST['isUndefined_dataType'],
+                            "children"=>NULLABLE($_POST['isUndefined_children']),
+                            "attribs"=>NULLABLE($_POST['isUndefined_attribs']),
+                        ),
+                        "title"=> array(
+                            "dataType"=>$_POST['title_dataType'],
+                            "children"=>NULLABLE($_POST['title_children']),
+                            "attribs"=>NULLABLE($_POST['title_attribs']),
+                        ),
+                        "href"=> array(
+                            "dataType"=>$_POST['href_dataType'],
+                            "children"=>NULLABLE($_POST['href_children']),
+                            "attribs"=>NULLABLE($_POST['href_attribs']),
+                        ),
+                        "price"=> array(
+                            "dataType"=>$_POST['price_dataType'],
+                            "children"=>NULLABLE($_POST['price_children']),
+                            "attribs"=>NULLABLE($_POST['price_attribs']),
+                        )
+                    ),
+                    "detail"=> array(
+                        "image"=> array(
+                            "dataType"=>$_POST['image_dataType'],
+                            "children"=>NULLABLE($_POST['image_children']),
+                            "attribs"=>NULLABLE($_POST['image_attribs']),
+                        ),
+                        "brand"=> array(
+                            "dataType"=>$_POST['brand_dataType'],
+                            "children"=>NULLABLE($_POST['brand_children']),
+                            "attribs"=>NULLABLE($_POST['brand_attribs']),
+                        ),
+                        "info"=> array(
+                            "dataType"=>$_POST['info_dataType'],
+                            "children"=>NULLABLE($_POST['info_children']),
+                            "attribs"=>NULLABLE($_POST['info_attribs']),
+                        ),
+                        "desc"=> array(
+                            "dataType"=>$_POST['desc_dataType'],
+                            "children"=>NULLABLE($_POST['desc_children']),
+                            "attribs"=>NULLABLE($_POST['desc_attribs']),
+                        )
+                    )
+                );
+                $this->model->get("product")->addConfig($config);
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"ERROR"
+                )));
+            }
+        }
+    }
+    function update_config_handle(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if($_POST!=null){
+                $config = array(
+                    "config"=> array(
+                        "name"=>$_POST['name'],
+                        "method"=>$_POST['method'],
+                        "urlPost"=>NULLABLE($_POST['urlPost']),
+                        "baseurl"=>NULLABLE($_POST['baseUrl']),
+                        "dataCherrio"=>$_POST['dataCherrio'],
+                        "item_dataCherrio"=> array(
+                            "isUndefined"=> array(
+                                "bool"=>$_POST['isUndefined_bool'],
+                                "dataType"=>$_POST['isUndefined_dataType'],
+                                "children"=>NULLABLE($_POST['isUndefined_children']),
+                                "attribs"=>NULLABLE($_POST['isUndefined_attribs']),
+                            ),
+                            "title"=> array(
+                                "dataType"=>$_POST['title_dataType'],
+                                "children"=>NULLABLE($_POST['title_children']),
+                                "attribs"=>NULLABLE($_POST['title_attribs']),
+                            ),
+                            "href"=> array(
+                                "dataType"=>$_POST['href_dataType'],
+                                "children"=>NULLABLE($_POST['href_children']),
+                                "attribs"=>NULLABLE($_POST['href_attribs']),
+                            ),
+                            "price"=> array(
+                                "dataType"=>$_POST['price_dataType'],
+                                "children"=>NULLABLE($_POST['price_children']),
+                                "attribs"=>NULLABLE($_POST['price_attribs']),
+                            )
+                        ),
+                        "detail"=> array(
+                            "image"=> array(
+                                "dataType"=>$_POST['image_dataType'],
+                                "children"=>NULLABLE($_POST['image_children']),
+                                "attribs"=>NULLABLE($_POST['image_attribs']),
+                            ),
+                            "brand"=> array(
+                                "dataType"=>$_POST['brand_dataType'],
+                                "children"=>NULLABLE($_POST['brand_children']),
+                                "attribs"=>NULLABLE($_POST['brand_attribs']),
+                            ),
+                            "info"=> array(
+                                "dataType"=>$_POST['info_dataType'],
+                                "children"=>NULLABLE($_POST['info_children']),
+                                "attribs"=>NULLABLE($_POST['info_attribs']),
+                            ),
+                            "desc"=> array(
+                                "dataType"=>$_POST['desc_dataType'],
+                                "children"=>NULLABLE($_POST['desc_children']),
+                                "attribs"=>NULLABLE($_POST['desc_attribs']),
+                            )
+                        )
+                    ),
+                    "nameConfig"=> $_POST['nameConfig']
+                );
+                $this->model->get("product")->updateConfig($config);
             }else {
                 print_r(json_encode(array(
                     "status"=>403,

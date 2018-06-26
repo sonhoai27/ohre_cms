@@ -13,7 +13,6 @@ function makeAlias(idName, idAlias) {
     str = str.replace(/^\-+|\-+$/g, ""); //cắt bỏ ký tự - ở đầu và cuối chuỗi
     $("#"+idAlias).val(str)
 }
-$(".select2").select2();
 
 $('#productDetail').on('shown.bs.modal', function (event)  {
     var button = $(event.relatedTarget)
@@ -39,16 +38,15 @@ var delay = (function(){
         timer = setTimeout(callback, ms);
     };
 })();
-
 function searchProductForGroup(){
     delay(function(){
-        $.post(BASE_URL+"products/search_product_handle", {keyword: $("#product_name").val(), idGroup: $("#id-product-group").data("id")}, function (dataSearch) {
+        $.post(BASE_URL+"products/search_product_group_handle", {keyword: $("#product_name").val(), idGroup: $("#id-product-group").data("id")}, function (dataSearch) {
             if(dataSearch !== ""){
                 toastr.success('Thành công!', 'Tìm sản phẩm với keyword '+$("#product_name").val()+" thành công.",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
                 $("#img-search-product-group").remove()
                 $("#myDataTable").remove()
                 $("#myDataTable_wrapper").remove()
-                $("#dataTableGroupSearchProduct").append('<table class="table table-striped table-bordered display" id="myDataTable" style="width:100%"></table>')
+                $("#dataTableGroupSearchProduct").append('<table class="table table-bordered mb-0" id="myDataTable" style="width:100%"></table>')
                 $('#myDataTable').DataTable({
                     data: JSON.parse(dataSearch),
                     columns: [
@@ -67,4 +65,8 @@ function searchProductForGroup(){
             }
         })
     }, 1000)
+}
+
+function searchProduct() {
+    alert($("#product_name").val())
 }
