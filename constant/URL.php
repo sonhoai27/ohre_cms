@@ -14,6 +14,7 @@ define("PRODUCTS_PRODUCT_DIDONGTHONGMINH", API."product/didongthongminh");
 define("PRODUCTS_PRODUCT_ADAYROI", API."product/adayroi");
 define("PRODUCTS_PRODUCT_TGDD", API."product/tgdd");
 define("API_PRODUCT_DETAIL", API."product/");
+define("API_PRODUCT_CRAWLER", API."product/config/crawler");
 
 
 //category api
@@ -46,3 +47,5 @@ define("PRODUCTS_GROUP", BASE_URL."products/group");
 define("PRODUCT_DETAIL", BASE_URL."products/detail_handle");
 define("PRODUCTS_CONFIG", BASE_URL."products/config");
 define("PRODUCTS_DETAIL_CONFIG", BASE_URL."products/detail_config");
+
+define("HOMEANALYTICSNORMAL", API.'collection/analytics/home/normal');

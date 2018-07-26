@@ -12,6 +12,12 @@ class indexController extends BaseController
     //overidde method abstract
     function index()
     {
+        $model = $this->model->get('analytics');
+        $this->view->data['homeAnalyticsNormal'] = $model->homeAnalyticsNormal(array(
+            "day"=>24,
+            "month"=>7,
+            "year"=>2018
+        ));
         $this->view->render("index");
         $this->renderView("main", "footer");
     }

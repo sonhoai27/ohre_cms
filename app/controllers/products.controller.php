@@ -10,7 +10,7 @@ class ProductsController extends BaseController {
         $model = $this->model;
 
         $page = isset($_GET['page'])?$_GET['page'] : 1;
-
+        $this->view->data['configs'] = $model->get("product")->allConfig();
         $this->view->data['category'] = $model->get("menu")->getChild();
         $responseFromAPI = $model->get("product")->getAll($page);
         $this->view->data['products'] = $responseFromAPI->products;
@@ -27,7 +27,6 @@ class ProductsController extends BaseController {
         $page = isset($_GET['page'])?$_GET['page'] : 1;
 
         $this->view->data['status']= $model->get("status")->getStatus();
-
         $responseFromAPI = $model->get("product")->groups($page);
         $this->view->data['groups']= $responseFromAPI->groups;
         $pg = new Pagination(20,$responseFromAPI->numRows, $page,BASE_URL."products/group");
@@ -214,7 +213,7 @@ class ProductsController extends BaseController {
                     "name"=>$_POST['name'],
                     "method"=>$_POST['method'],
                     "urlPost"=>NULLABLE($_POST['urlPost']),
-                    "baseurl"=>NULLABLE($_POST['baseUrl']),
+                    "baseUrl"=>NULLABLE($_POST['baseUrl']),
                     "dataCherrio"=>$_POST['dataCherrio'],
                     "item_dataCherrio"=> array(
                         "isUndefined"=> array(
@@ -262,7 +261,9 @@ class ProductsController extends BaseController {
                         )
                     )
                 );
-                $this->model->get("product")->addConfig($config);
+                if($this->model->get("product")->addConfig($config)->message == "OK"){
+                    $this->redirect("products", "config");
+                }
             }else {
                 print_r(json_encode(array(
                     "status"=>403,
@@ -279,7 +280,7 @@ class ProductsController extends BaseController {
                         "name"=>$_POST['name'],
                         "method"=>$_POST['method'],
                         "urlPost"=>NULLABLE($_POST['urlPost']),
-                        "baseurl"=>NULLABLE($_POST['baseUrl']),
+                        "baseUrl"=>NULLABLE($_POST['baseUrl']),
                         "dataCherrio"=>$_POST['dataCherrio'],
                         "item_dataCherrio"=> array(
                             "isUndefined"=> array(
@@ -329,7 +330,9 @@ class ProductsController extends BaseController {
                     ),
                     "nameConfig"=> $_POST['nameConfig']
                 );
-                $this->model->get("product")->updateConfig($config);
+                if($this->model->get("product")->updateConfig($config)->message == "OK"){
+                    $this->redirect("products", "config");
+                }
             }else {
                 print_r(json_encode(array(
                     "status"=>403,

@@ -48,14 +48,12 @@ class ProductModel extends BaseModel {
     }
     function addConfig($form){
         global $post;
-//        return json_decode($post->send(API_PRODUCT_CONFIG, $form));
-        print_r($post->send($form,API_PRODUCT_CONFIG."/add"));
+        return json_decode($post->send($form,API_PRODUCT_CONFIG."/add"));
     }
 
     function updateConfig($form){
         global $put;
-//        return json_decode($post->send(API_PRODUCT_CONFIG, $form));
-        print_r($put->send($form['config'],$form['nameConfig'],API_PRODUCT_CONFIG."/update"));
+        return json_decode($put->send($form['config'],$form['nameConfig'],API_PRODUCT_CONFIG."/update"));
     }
     function allConfig(){
         global $get;

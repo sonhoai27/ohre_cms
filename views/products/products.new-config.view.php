@@ -54,7 +54,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="projectinput1">Tên cấu hình</label>
-                                        <input type="text" id="name" class="form-control" placeholder="Name" name="name">
+                                        <input type="text" id="name" onkeyup="makeAliasV2('name', '-')" class="form-control" placeholder="Name" name="name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

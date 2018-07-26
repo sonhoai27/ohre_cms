@@ -41,7 +41,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a href="<?=BASE_URL?>"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Trang chủ</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i class="ft ft-box"></i><span class="menu-title" data-i18n="nav.timelines.main">Danh mục</span></a>
+            <li class="nav-item has-sub"><a href="#"><i class="ft ft-box"></i><span class="menu-title" data-i18n="nav.timelines.main">Danh mục</span></a>
                 <ul class="menu-content">
                     <li><a href="#"><span class="menu-title" data-i18n="nav.timelines.main">Danh mục sản phẩm</span></a>
                         <ul class="menu-content">
@@ -59,7 +59,7 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Tài khoản</span></a>
+            <li class=" nav-item has-sub"><a href="#"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Tài khoản</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">User</a>
                     </li>
@@ -67,7 +67,7 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><i class="ft ft-package"></i><span class="menu-title" data-i18n="nav.timelines.main">Sản phẩm</span></a>
+            <li class=" nav-item has-sub"><a href="#"><i class="ft ft-package"></i><span class="menu-title" data-i18n="nav.timelines.main">Sản phẩm</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="<?=PRODUCTS_PRODUCT?>" data-i18n="nav.timelines.timeline_center">Crawler sản phẩm</a>
                     </li>
@@ -77,7 +77,7 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><i class="ft ft-bar-chart"></i><span class="menu-title" data-i18n="nav.timelines.main">Thống kê</span></a>
+            <li class=" nav-item has-sub"><a href="#"><i class="ft ft-bar-chart"></i><span class="menu-title" data-i18n="nav.timelines.main">Thống kê</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">Sản phẩm</a>
                     </li>

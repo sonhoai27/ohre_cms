@@ -5,11 +5,13 @@ $assetsCSS = '
             <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/extensions/toastr.css">
             <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/plugins/extensions/toastr.css">
             <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/forms/selects/select2.min.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/core/colors/palette-tooltip.css">
             ';
 $tempAssetsJS = '
            <script src="'.BASE_URL.'public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
            <script src="'.BASE_URL.'public/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
             <script src="'.BASE_URL.'public/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
+            <script src="'.BASE_URL.'public/app-assets/js/scripts/tooltip/tooltip.js" type="text/javascript"></script>
            <script>$(".select2").select2();</script>
            ';
 define("AssetsJS", $tempAssetsJS);
@@ -95,42 +97,82 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
 
 <div class="modal fade text-left" id="add-new-menu" role="dialog" aria-labelledby="myModalLabel17"
      aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel17">Thêm mới item menu</h4>
+                <h4 class="modal-title" id="myModalLabel17">Lấy dữ liệu sản phẩm</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="userinput1">Địa chỉ trang web</label>
-                    <input type="text" class="form-control" id="shop_url" placeholder="Địa chỉ trang web">
+                <div class="row">
+                   <div class="col-sm-6">
+                       <div class="form-group">
+                           <label for="userinput1">Địa chỉ trang web</label>
+                           <input type="text" class="form-control" id="shop_url" placeholder="Địa chỉ trang web">
+                       </div>
+                   </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label data-toggle="tooltip"
+                                   data-placement="right"
+                                   title="Chọn cấu hình phải tương ứng vói chọn cửa hàng." for="config_id">Chọn cấu hình</label>
+                            <select class="select2  form-control" id="config_id" style="width: 100%!important;">
+                                <?php
+                                foreach ($configs as $item){
+                                    $config = explode(".", $item)[0];
+                                    ?>
+                                    <option value="<?=$item?>"><?=explode("_",$config)[0]?> - <?=explode("_",$config)[1]?></option>
+                                <?php }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="userinput1">*Vị trí cần lấy</label>
-                    <input type="text" class="form-control" id="shop_page" value="0">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="userinput1">(*)Vị trí cần lấy</label>
+                            <input type="text" class="form-control" id="shop_page" value="0">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="userinput1">(*)Cấu hình cho POST</label>
+                            <textarea type="text" class="form-control" id="formDataPost" >
+                        {
+
+                        }
+                    </textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="category_parent_id">Chọn cửa hàng</label>
-                    <select class="select2  form-control" id="shop_id" style="width: 100%!important;">
-                        <?php
-                        foreach ($shops as $item){?>
-                            <option value="<?=$item->shop_id?>"><?=$item->shop_name?></option>
-                        <?php }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="category_parent_id">Chọn danh mục</label>
-                    <select class="select2  form-control" id="category_id" style="width: 100%!important;">
-                        <?php
-                        foreach ($category as $item){?>
-                            <option value="<?=$item->category_id?>"><?=$item->category_name?></option>
-                        <?php }
-                        ?>
-                    </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="category_parent_id">Chọn cửa hàng</label>
+                            <select class="select2  form-control" id="shop_id" style="width: 100%!important;">
+                                <?php
+                                foreach ($shops as $item){?>
+                                    <option value="<?=$item->shop_id?>"><?=$item->shop_name?></option>
+                                <?php }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="category_parent_id">Chọn danh mục</label>
+                            <select class="select2  form-control" id="category_id" style="width: 100%!important;">
+                                <?php
+                                foreach ($category as $item){?>
+                                    <option value="<?=$item->category_id?>"><?=$item->category_name?></option>
+                                <?php }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 (*) chỉ áp dụng cho phương thức Lazy Get Product
             </div>
@@ -175,9 +217,12 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
             page: $("#shop_page").val(),
             idCate: $("#category_id").val(),
             idShop: $("#shop_id").val(),
-            idUser: $("#idUser").data("user-id")
+            idUser: $("#idUser").data("user-id"),
+            idConfig: $('#config_id').val(),
+            formData: $("#formDataPost").val()
         }
-        $.post('<?=PRODUCTS_PRODUCT_ADAYROI?>', form, function (data) {
+        console.log(form)
+        $.post('<?=API_PRODUCT_CRAWLER?>', form, function (data) {
             if(data.status == 200){
                 toastr.success('Thành công!', 'Thêm '+$("#shop_url").val()+" thành công",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
                 setTimeout(function () {

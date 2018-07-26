@@ -66,8 +66,8 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                             $config = explode(".", $item)[0];
                                             ?>
                                             <tr id="product-group-id-<?= $config ?>">
-                                                <td><?= strtoupper(explode('-', $config)[0]) ?></td>
-                                                <td><?= strtoupper(explode('-', $config)[1]) ?></td>
+                                                <td><?= strtoupper(explode('_', $config)[0]) ?></td>
+                                                <td><?= strtoupper(explode('_', $config)[1]) ?></td>
                                                 <td class="text-right">
                                                     <div>
                                                         <button class="btn btn-info btn-sm"
@@ -474,7 +474,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 // Create json-tree
                 var tree = jsonTree.create(JSON.parse(result), wrapper);
                 // Expand all (or selected) child nodes of root (optional)
-                tree.expand();
             }, 2000)
         })
     }
