@@ -52,10 +52,29 @@ var delay = (function(){
         timer = setTimeout(callback, ms);
     };
 })();
+
+$('#edit-brand').on('shown.bs.modal', function (event)  {
+    var button = $(event.relatedTarget)
+    var modal = $(this)
+    $.post(BASE_URL+"/category/detail_brand",{id: button.data("id")}, function (response) {
+        const res = JSON.parse(response)
+        console.log(res)
+        modal.find("#name-brand").val(res.brand_name)
+        modal.find("#alias-brand").val(res.brand_alias)
+        modal.find("#id-brand").val(res.brand_id)
+    })
+})
+$('#edit-brand').on('hidden.bs.modal', function () {
+    var modal = $(this)
+    modal.find("#name-brand").val('')
+    modal.find("#alias-brand").val('')
+    modal.find("#id-brand").val('')
+})
 function searchProductForGroup(){
     delay(function(){
         $.post(BASE_URL+"products/search_product_group_handle", {keyword: $("#product_name").val(), idGroup: $("#id-product-group").data("id")}, function (dataSearch) {
             if(dataSearch !== ""){
+                console.log(JSON.parse(dataSearch))
                 toastr.success('Thành công!', 'Tìm sản phẩm với keyword '+$("#product_name").val()+" thành công.",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
                 $("#img-search-product-group").remove()
                 $("#myDataTable").remove()
@@ -83,4 +102,157 @@ function searchProductForGroup(){
 
 function searchProduct() {
     alert($("#product_name").val())
+}
+
+$(function () {
+    $('.datepicker-day').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+    $('.datepicker-month').datepicker({
+        dateFormat: 'mm-yy',
+        inline: true,
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        onClose: function (dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            getMonthUser(1)
+        }
+    });
+    $('.datepicker-year').datepicker({
+        dateFormat: 'yy',
+        inline: true,
+        changeYear: true,
+        showButtonPanel: true,
+        onClose: function (dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+           getYearUser(1)
+        }
+    });
+})
+
+function getDayUser() {
+    const date = ($("#day-user").val()).split("-")
+    $.post(BASE_URL + 'analytics/detailDayAnalyticsUser', {
+        date: {
+            day: date[0],
+            month: date[1],
+            year: date[2]
+        }, url: 'day'
+    }, function (result) {
+        $("#user-day").remove()
+        $("#user-day_wrapper").remove()
+        $("#mytb1").append('<table class="table table-bordered mb-0" id="user-day" style="width:100%"></table>')
+        if(JSON.parse(result).length > 0){
+            $('#user-day').DataTable({
+                data: JSON.parse(result),
+                columns: [
+                    { title: "IP" },
+                    { title: "Browser info" },
+                    { title: "Toạ độ" },
+                    { title: "Thành phố" }
+                ]
+            });
+        }else {
+            toastr.warning('Cảnh báo!', "Ngày này không có dữ liệu!",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
+        }
+    })
+}
+
+function getMonthUser(type) {
+    var date
+    if(type === 0){
+         date = new Date()
+    }else {
+        date = ($("#month-chart").val()).split("-")
+    }
+    $.post(BASE_URL + 'analytics/detailDayAnalyticsUser', {
+        date: {
+            month: (type === 0 ? date.getMonth()+1 : date[0]),
+            year: (type === 0 ? date.getFullYear() : date[1])
+        }, url: 'month'
+    }, function (result) {
+        drawColumnMonthUser(JSON.parse(result).chart, 'column-chart-month-user')
+        console.log(JSON.parse(result))
+        $("#user-month").remove()
+        $("#user-month_wrapper").remove()
+        $("#mytb2").append('<table class="table table-bordered mb-0" id="user-month" style="width:100%"></table>')
+        if((JSON.parse(result).list).length > 0){
+            $('#user-month').DataTable({
+                data: JSON.parse(result).list,
+                columns: [
+                    { title: "IP" },
+                    { title: "Browser info" },
+                    { title: "Toạ độ" },
+                    { title: "Thành phố" }
+                ]
+            });
+        }else {
+            toastr.warning('Cảnh báo!', "Ngày này không có dữ liệu!",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
+        }
+    })
+}
+
+function getYearUser(type) {
+    var date
+    if(type === 0){
+        date = new Date()
+    }else {
+        date = ($("#year-chart").val()).split("-")
+    }
+    $.post(BASE_URL + 'analytics/detailDayAnalyticsUser', {
+        date: {
+            year: (type === 0 ? date.getFullYear() : date[0])
+        }, url: 'year'
+    }, function (result) {
+        console.log(JSON.parse(result))
+        drawColumnMonthUser(JSON.parse(result).chart, 'column-chart-year-user')
+        $("#user-year").remove()
+        $("#user-year_wrapper").remove()
+        $("#mytb3").append('<table class="table table-bordered mb-0" id="user-year" style="width:100%"></table>')
+        if((JSON.parse(result).list).length > 0){
+            $('#user-year').DataTable({
+                data: JSON.parse(result).list,
+                columns: [
+                    { title: "IP" },
+                    { title: "Browser info" },
+                    { title: "Toạ độ" },
+                    { title: "Thành phố" }
+                ]
+            });
+        }else {
+            toastr.warning('Cảnh báo!', "Ngày này không có dữ liệu!",{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000});
+        }
+    })
+}
+function drawColumnMonthUser(result, id) {
+    var data = google.visualization.arrayToDataTable(result);
+    var options_column_stacked = {
+        height: 300,
+        fontSize: 12,
+        isStacked: true,
+        colors: ['#99B898'],
+        chartArea: {
+            left: '5%',
+            width: '90%',
+            height: 250
+        },
+        vAxis: {
+            gridlines: {
+                color: '#e9e9e9',
+                count: 10
+            },
+            minValue: 0
+        },
+        legend: {
+            position: 'top',
+            alignment: 'center',
+            textStyle: {
+                fontSize: 12
+            }
+        }
+    };
+    var bar = new google.visualization.ColumnChart(document.getElementById(id));
+    bar.draw(data, options_column_stacked);
+
 }

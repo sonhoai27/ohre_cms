@@ -148,6 +148,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 idGroup: $("#id-product-group").data("id"),
                 idProduct: idProduct
             }, function (resultAdd) {
+                console.log(resultAdd)
                 var tempAdd = JSON.parse(JSON.parse(resultAdd))
                 if (tempAdd.message === "OK") {
                     $("#data-id-" + idProduct).data("click", "on")
@@ -157,7 +158,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                         timeOut: 1000
                     });
                 } else {
-                    toastr.error('Thất bại!', 'Thêm ' + $("#data-id-" + idProduct).text() + " thất bại.", {
+                    toastr.error('Thất bại!', 'Thêm ' + $("#data-id-" + idProduct).text() + " thất bại. Duplicate Key", {
                         "showMethod": "slideDown",
                         "hideMethod": "slideUp",
                         timeOut: 1000

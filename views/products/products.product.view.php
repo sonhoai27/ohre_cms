@@ -38,12 +38,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <div class="float-md-right">
                     <div class="card float-right">
                         <div class="card-body tool-bar-action">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="product_name" placeholder="Tìm kiếm sản phẩm" aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary btn-sm" type="button" onclick="searchProduct()">Tìm</button>
-                                </div>
-                            </div>
                             <a data-toggle="modal" data-target="#add-new-menu" class="item text-center" href="#"><i class="la la-calendar-check-o"></i> Thêm mới</a>
                         </div>
                     </div>
@@ -64,7 +58,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                     <th>Tên</th>
                                     <th>Giá</th>
                                     <th>Cửa hàng</th>
-                                    <th>Thiết lập</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -74,12 +67,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                             <td><?=$item->product_name?></td>
                                             <td><?=$item->product_price?></td>
                                             <td><?=$item->shop_name?></td>
-                                            <td>
-                                                <div class="float-right">
-                                                    <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1" data-target="#productDetail" data-toggle="modal" data-id="<?=$item->product_id?>"><i class="icon-note"></i></button>
-                                                    <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
-                                                </div>
-                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

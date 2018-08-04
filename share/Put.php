@@ -21,8 +21,9 @@ class Put
 
         return $result;
     }
-    function headerSend($headers, $idEdit,$apiUrl)
+    function headerSend($form,$headers = array(), $idEdit,$apiUrl)
     {
+        $payload = json_encode($form);
         $header = ['Content-Type: application/json'];
         foreach ($headers as $item){
             array_push($header, $item);
@@ -31,6 +32,7 @@ class Put
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header
         );
         $result = curl_exec($ch);

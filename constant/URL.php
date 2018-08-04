@@ -21,7 +21,8 @@ define("API_PRODUCT_CRAWLER", API."product/config/crawler");
 define("API_CATEGORY_ALL", API."menu/all");
 define("API_CATEGORY", API."menu");
 define("API_CATEGORY_CHILD", API."menu/child");
-
+define("API_BRAND", API."brand");
+define("API_STATUS", API."status");
 
 //group api
 define("GROUP_ADD", API."product/group/add");
@@ -48,4 +49,10 @@ define("PRODUCT_DETAIL", BASE_URL."products/detail_handle");
 define("PRODUCTS_CONFIG", BASE_URL."products/config");
 define("PRODUCTS_DETAIL_CONFIG", BASE_URL."products/detail_config");
 
-define("HOMEANALYTICSNORMAL", API.'collection/analytics/home/normal');
+define("HOMEANALYTICS", API.'collection/analytics/home/');
+define("DETAILANALYTICS", API.'collection/analytics/detail/chart/');
+define("DETAILANALYTICSTOP10", API.'collection/analytics/detail/top10/');
+define("DETAILANALYTICSUSER", API.'collection/analytics/detail/users/');
+
+define("USER", BASE_URL.'auth/manager');
+define("ALLGUESTUSERS", API.'auth/all-guest-users');

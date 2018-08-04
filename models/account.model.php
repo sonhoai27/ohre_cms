@@ -6,7 +6,7 @@ class AccountModel extends BaseModel{
     }
     function checkToken($token){
         global $post;
-        return $post->headerSend(array(
+        return $post->headerSend(null,array(
             "access_token: ".$token
         ), API_CHECK_TOKEN);
     }
@@ -17,5 +17,13 @@ class AccountModel extends BaseModel{
     function activeAccount($email, $key){
         global $get;
         return $get->explore_get(API."auth/active-account",[$email, $key]);
+    }
+    function allGuestUser(){
+        global $get;
+        return ($get->normal_get(ALLGUESTUSERS));
+    }
+    function detailGeustUser($id){
+        global $get;
+        return $get->explore_get(ALLGUESTUSERS, [$id]);
     }
 }

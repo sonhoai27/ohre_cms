@@ -17,6 +17,11 @@ class Delete{
         curl_setopt($ch, CURLOPT_URL, $url.$param);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'access_token: '.$_SESSION['user_token']
+            )
+        );
         $output = curl_exec($ch);
         return json_decode($output);
         curl_close($ch);
@@ -32,6 +37,11 @@ class Delete{
         curl_setopt($ch, CURLOPT_URL, $url.$param);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'access_token: '.$_SESSION['user_token']
+            )
+        );
         $output = curl_exec($ch);
         return json_decode($output);
         curl_close($ch);
@@ -43,7 +53,7 @@ class Delete{
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'access_token: aaaaaaaa'
+                'access_token: '.$_SESSION['user_token']
             )
         );
         $output = curl_exec($ch);

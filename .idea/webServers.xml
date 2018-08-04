@@ -10,6 +10,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="93b4f685-cd81-4dff-89b7-101de5b05235" name="maxpower" url="http://cp-01.techhost.vn">
+        <fileTransfer host="cp-01.techhost.vn" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

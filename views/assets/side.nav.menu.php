@@ -25,8 +25,8 @@
                             <span class="avatar avatar-online">
                   <img src="<?=BASE_URL?>public/images/index/avatar.png" alt="avatar"><i></i></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ft-user"></i> Tài khoản</a>
-                            <a class="dropdown-item" href="#"><i class="ft-mail"></i> Thông báo</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="<?=BASE_URL?>auth/recover_password"><i class="ft-user"></i> Đổi mật khẩu</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="<?=BASE_URL?>auth/logout"><i class="ft-power"></i> Thoát</a>
                         </div>
                     </li>
@@ -43,29 +43,13 @@
             </li>
             <li class="nav-item has-sub"><a href="#"><i class="ft ft-box"></i><span class="menu-title" data-i18n="nav.timelines.main">Danh mục</span></a>
                 <ul class="menu-content">
-                    <li><a href="#"><span class="menu-title" data-i18n="nav.timelines.main">Danh mục sản phẩm</span></a>
-                        <ul class="menu-content">
-                            <li><a class="menu-item" href="<?=CATEGORY_BRAND?>" data-i18n="nav.timelines.timeline_right">Hãng</a>
-                            <li><a class="menu-item" href="<?=CATEGORY_GROUP?>" data-i18n="nav.timelines.timeline_center">Loại - nhóm</a>
-                            </li>
-                            <li><a class="menu-item" href="<?=CATEGORY_MENU?>" data-i18n="nav.timelines.timeline_left">Danh mục</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="menu-item" href="<?=CATEGORY_SHOP?>" data-i18n="nav.timelines.timeline_left">Cửa hàng</a>
-                    </li>
-                    </li>
-                    <li><a class="menu-item" href="<?=CATEGORY_STATUS?>" data-i18n="nav.timelines.timeline_horizontal">Trạng thái</a>
-                    </li>
+                    <li><a class="menu-item" href="<?=CATEGORY_BRAND?>" data-i18n="nav.timelines.timeline_right">Hãng</a></li>
+                    <li><a class="menu-item" href="<?=CATEGORY_MENU?>" data-i18n="nav.timelines.timeline_left">Danh mục</a></li>
+                    <li><a class="menu-item" href="<?=CATEGORY_SHOP?>" data-i18n="nav.timelines.timeline_left">Cửa hàng</a></li>
+                    <li><a class="menu-item" href="<?=CATEGORY_STATUS?>" data-i18n="nav.timelines.timeline_horizontal">Trạng thái</a></li>
                 </ul>
             </li>
-            <li class=" nav-item has-sub"><a href="#"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Tài khoản</span></a>
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">User</a>
-                    </li>
-                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Anonymous User</a>
-                    </li>
-                </ul>
+            <li class=" nav-item"><a href="<?=USER?>"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Tài khoản người dùng</span></a>
             </li>
             <li class=" nav-item has-sub"><a href="#"><i class="ft ft-package"></i><span class="menu-title" data-i18n="nav.timelines.main">Sản phẩm</span></a>
                 <ul class="menu-content">
@@ -79,9 +63,9 @@
             </li>
             <li class=" nav-item has-sub"><a href="#"><i class="ft ft-bar-chart"></i><span class="menu-title" data-i18n="nav.timelines.main">Thống kê</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="timeline-center.html" data-i18n="nav.timelines.timeline_center">Sản phẩm</a>
+                    <li><a class="menu-item" href="<?=BASE_URL.'analytics'?>" data-i18n="nav.timelines.timeline_center">Lượt xem</a>
                     </li>
-                    <li><a class="menu-item" href="timeline-left.html" data-i18n="nav.timelines.timeline_left">Tất cả</a>
+                    <li><a class="menu-item" href="<?=BASE_URL.'analytics/user'?>" data-i18n="nav.timelines.timeline_left">User</a>
                     </li>
                 </ul>
             </li>

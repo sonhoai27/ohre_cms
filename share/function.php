@@ -13,3 +13,11 @@ function NULLABLE($data){
         return 'null';
     }else return $data;
 }
+
+function isPost(){
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        return true;
+    }else {
+        return false;
+    }
+}

@@ -13,11 +13,13 @@ class indexController extends BaseController
     function index()
     {
         $model = $this->model->get('analytics');
+        $currentDay = explode('-', date("d-m-Y"));
         $this->view->data['homeAnalyticsNormal'] = $model->homeAnalyticsNormal(array(
-            "day"=>24,
-            "month"=>7,
-            "year"=>2018
+            "day"=>$currentDay[0],
+            "month"=>$currentDay[1],
+            "year"=>$currentDay[2]
         ));
+        $this->view->data['homeAnalyticsTop10'] = $model->homeAnalyticsTop10();
         $this->view->render("index");
         $this->renderView("main", "footer");
     }
@@ -31,13 +33,18 @@ class indexController extends BaseController
         }
     }
 
-    function about()
-    {
-        echo "about";
-    }
-
-    function chat()
-    {
-
+    // handle load chart of home index
+    function homeAnalyticsChart(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(isset($_POST['weekListDays'])){
+                $model = $this->model->get('analytics');
+                print_r($model->homeAnalyticsChart($_POST['weekListDays']));
+            }else {
+                print_r(json_encode(array(
+                    "status"=>403,
+                    "message"=>"error, no found weekListDays!"
+                )));
+            }
+        }
     }
 }

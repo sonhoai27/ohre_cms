@@ -9,9 +9,27 @@ class authController extends BaseController{
     //controller view
     function index()
     {
-        $this->redirect("auth", "account");
+        $this->redirect("auth", "manager");
     }
 
+    function manager(){
+        if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
+            $model = $this->model->get('account');
+            $this->view->data['listUsers'] = $model->allGuestUser();
+            $this->view->render("auth/auth.all-user");
+            $this->renderView("main", "footer");
+        }else {
+            $this->redirect("auth", "account");
+        }
+    }
+
+    function detail_guest_user($args){
+        if(isset($args[1])){
+            $this->view->data['detail'] = $this->model->get('account')->detailGeustUser($args[1]);
+            $this->view->render("auth/auth.detail-user");
+            $this->renderView("main", "footer");
+        }
+    }
     function login(){
         if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
             $this->redirect("index");
@@ -35,12 +53,8 @@ class authController extends BaseController{
         $this->view->render("auth/auth.active-account");
     }
     function recover_password(){
-        if(isset($_SESSION['user_token']) && $this->checkToken($_SESSION['user_token'])){
-            $this->redirect("index");
-        }else {
-            $this->view->render("auth/auth.recover-password");
-            $this->renderView("main", "footer");
-        }
+        $this->view->render("auth/auth.recover-password");
+        $this->renderView("main", "footer");
     }
 
     function logout(){

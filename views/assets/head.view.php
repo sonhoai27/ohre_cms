@@ -16,6 +16,7 @@
     <!-- App css -->
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/vendors.css">
+    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/vendors/css/ui/jquery-ui.min.css">
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/app.css">
@@ -25,9 +26,9 @@
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>public/app-assets/fonts/simple-line-icons/style.css">
     <?php
-        if((isset($assetsCSS))){
-            print_r($assetsCSS);
-        }
+    if((isset($assetsCSS))){
+        print_r($assetsCSS);
+    }
     ?>
     <link href="<?=BASE_URL?>public/css/custom.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>

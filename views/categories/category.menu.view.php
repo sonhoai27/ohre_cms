@@ -5,12 +5,17 @@ $assetsCSS = '
             <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/extensions/toastr.css">
             <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/css/plugins/extensions/toastr.css">
             <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/forms/selects/select2.min.css">
+            <link rel="stylesheet" type="text/css" href="'.BASE_URL.'public/app-assets/vendors/css/tables/datatable/datatables.min.css">
             ';
 $tempAssetsJS = '
+            <script src="'.BASE_URL.'public/app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
             <script src="'.BASE_URL.'public/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
             <script src="'.BASE_URL.'public/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
             <script src="'.BASE_URL.'public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
-            <script>$(".select2").select2();</script>
+            <script>
+                $(".select2").select2();
+                $("#tblMenu").DataTable()
+            </script>
             ';
 define("AssetsJS", $tempAssetsJS);
 require_once(__SITE_PATH . "/views/assets/head.view.php");
@@ -36,12 +41,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <div class="float-md-right">
                     <div class="card float-right">
                         <div class="card-body tool-bar-action">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm menu" aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary btn-sm" type="button">Tìm</button>
-                                </div>
-                            </div>
                             <a data-toggle="modal" data-target="#add-new-menu" class="item text-center" href="#"><i class="la la-calendar-check-o"></i> Thêm mới</a>
                         </div>
                     </div>
@@ -56,57 +55,34 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
+                            <table class="table table-bordered mb-0" id="tblMenu">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Tên</th>
-                                    <th>Menu cha</th>
-                                    <th>Địa chỉ</th>
                                     <th>Thiết lập</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>
-                                        <div class="float-right">
-                                            <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1"><i class="icon-note"></i></button>
-                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@TwBootstrap</td>
-                                    <td>
-                                        <div class="float-right">
-                                            <button type="button" class="btn btn-icon btn-outline-info btn-sm mr-1"><i class="icon-note"></i></button>
-                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm mr-1"><i class="icon-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php
+                                    foreach ($menus as $key => $item){?>
+                                        <tr>
+                                            <td><?=($key + 1)?></td>
+                                            <td><a href="<?=BASE_URL?>category/detail_menu/<?=$item->category_id?>"><?=$item->category_name?></a></td>
+                                            <td>
+                                                <div class="float-right">
+                                                    <button type="button"
+                                                            onclick="deleteMenu(<?=$item->category_id?>)"
+                                                            class="btn btn-icon btn-outline-danger btn-sm mr-1">
+                                                        <i class="icon-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                ?>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="float-right">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous">
-                                    <a href="#" class="page-link">Previous</a>
-                                </li>
-
-                                <li class="paginate_button page-item ">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="paginate_button page-item next">
-                                    <a href="#" class="page-link">Next</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -137,7 +113,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <div class="form-group">
                     <label for="category_parent_id">Chọn Item Cha</label>
                     <select class="select2  form-control" id="category_parent_id" style="width: 100%!important;">
-                        <option value="0">--| Không có</option>
+                        <option value="">--| Không có</option>
                         <?php
                             foreach ($menus as $item){?>
                                 <option value="<?=$item->category_id?>"><?=$item->category_name?></option>
@@ -151,6 +127,16 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <button type="button" class="btn btn-outline-primary" onclick="addNewCategory()">Save changes</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="cd-popup" role="alert">
+    <div class="cd-popup-container">
+        <p>Bạn có muốn xoá?</p>
+        <ul class="cd-buttons">
+            <li><a id="yesDeleteMenu">Có</a></li>
+            <li><a onclick="noDelete()">Không</a></li>
+        </ul>
+        <a href="#0" class="cd-popup-close img-replace"></a>
     </div>
 </div>
 <script>
@@ -171,5 +157,40 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 toastr.error('Lỗi.', 'Có lỗi trong quá trình thêm: '+ data.toString());
             }
         })
+    }
+</script>
+<script>
+    function deleteMenu(id) {
+        $('.cd-popup').addClass('is-visible');
+        $("#yesDeleteMenu").attr('onclick', 'yesDelete('+id+')');
+
+    }
+
+    jQuery(document).ready(function($){
+        $('.cd-popup').on('click', function(event){
+            if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
+                event.preventDefault();
+                $(this).removeClass('is-visible');
+            }
+        });
+    });
+    function yesDelete(id) {
+        $.post(BASE_URL+'category/delete_menu', {id: id}, function (data) {
+            console.log(data.trim())
+            if(data.trim() == 200){
+                toastr.success('Thành công!', 'Xoá thành công',{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000})
+                setTimeout(function () {
+                    window.location.href = BASE_URL+'category/menu'
+                },2000)
+            }else if(data.trim() == 403){
+                toastr.error('Thất bại!', 'Lỗi khoá ngoại!',{"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000})
+                setTimeout(function () {
+                    window.location.href = BASE_URL+'category/menu'
+                },2000)
+            }
+        })
+    }
+    function noDelete() {
+        $('.cd-popup').removeClass('is-visible');
     }
 </script>
