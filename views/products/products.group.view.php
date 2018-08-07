@@ -8,7 +8,10 @@ $assetsCSS = '
 $tempAssetsJS = '
            <script src="'.BASE_URL.'public/app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
            <script src="'.BASE_URL.'public/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
-           <script>$(".select2").select2();</script>
+           <script>
+            $("#tblListGroupProduct").DataTable()
+            $(".select2").select2();
+           </script>
            ';
 define("AssetsJS", $tempAssetsJS);
 require_once(__SITE_PATH . "/views/assets/head.view.php");
@@ -34,10 +37,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                 <div class="float-md-right">
                     <div class="card float-right">
                         <div class="card-body tool-bar-action">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm các nhóm sản phẩm"
-                                       aria-describedby="button-addon2">
-                            </div>
                             <a data-toggle="modal" data-target="#add-new-group" class="item text-center" href="#"><i
                                         class="la la-calendar-check-o"></i> Thêm mới</a>
                         </div>
@@ -54,7 +53,7 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                                 <?php
                                 if (count($groups) > 0) {
                                     ?>
-                                    <table class="table table-bordered mb-0"
+                                    <table class="table table-bordered mb-0" id="tblListGroupProduct"
                                            style="width:100%">
                                         <thead>
                                         <tr>

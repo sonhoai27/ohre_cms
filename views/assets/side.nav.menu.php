@@ -49,7 +49,7 @@
                     <li><a class="menu-item" href="<?=CATEGORY_STATUS?>" data-i18n="nav.timelines.timeline_horizontal">Trạng thái</a></li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="<?=USER?>"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Tài khoản người dùng</span></a>
+            <li class=" nav-item"><a href="<?=USER?>"><i class="ft ft-user"></i><span class="menu-title" data-i18n="nav.timelines.main">Người dùng</span></a>
             </li>
             <li class=" nav-item has-sub"><a href="#"><i class="ft ft-package"></i><span class="menu-title" data-i18n="nav.timelines.main">Sản phẩm</span></a>
                 <ul class="menu-content">

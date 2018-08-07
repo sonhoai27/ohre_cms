@@ -134,21 +134,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
                     <input type="text" id="shop_url" class="form-control" placeholder="https://" name="fname">
                 </div>
                 <div class="form-group">
-                    <label for="projectinput1">(*)Địa chỉ api shop</label>
-                    <input type="text" id="shop_api" class="form-control" placeholder="https://" name="fname">
-                </div>
-                <div class="form-group">
-                    <label for="userinput1">Trạng thái</label>
-                    <select class="form-control" id="shop_id_status">
-                        <option>Select Option</option>
-                        <?php
-                            foreach ($status as $item){ ?>
-                                <option value="<?=$item->status_id?>"><?=$item->status_name?></option>
-                            <?php }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="userinput1">Hình ảnh</label>
                     <input type="file" class="form-control" id="shop_avatar">
                 </div>
@@ -179,8 +164,6 @@ require_once(__SITE_PATH . "/views/assets/side.nav.menu.php");
         form.append("shop_name", $("#shop_name").val());
         form.append("shop_alias", $("#shop_alias").val());
         form.append("shop_url", $("#shop_url").val());
-        form.append("shop_id_status", $("#shop_id_status").val());
-        form.append("shop_url_api", $("#shop_api").val());
 
         var settings = {
             "async": true,

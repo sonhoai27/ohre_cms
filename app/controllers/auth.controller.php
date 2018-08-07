@@ -65,12 +65,31 @@ class authController extends BaseController{
             $this->redirect("auth","login");
         }
     }
+    private function get_client_ip() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
         //controller xy ly, dat den tuan theo
     // name controller + handle
     function login_handle(){
+        global $get;
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST['email'] != null && $_POST['password'] !=null){
-                $userInfo = json_decode(file_get_contents('http://ip-api.io/api/json'));
+                $userInfo = ($get->normal_get('http://api.ipstack.com/'.$this->get_client_ip().'?access_key=5912511bf081d0263bc7fb60d9c0f738'));
                 $resLogin = json_decode($this->model->get("account")->login(array(
                     "email"=>$_POST['email'],
                     "password"=>$_POST['password'],
@@ -99,7 +118,6 @@ class authController extends BaseController{
             )));
         }
     }
-
     function register_handle(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $resLogin = json_decode($this->model->get("account")->register(array(

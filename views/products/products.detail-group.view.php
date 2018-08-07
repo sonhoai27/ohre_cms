@@ -11,11 +11,7 @@ $tempAssetsJS = '
             <script src="'.BASE_URL.'public/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
             <script src="'.BASE_URL.'public/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
             <script>
-                $("#productsGroup").DataTable({
-                    "scrollY":        "400px",
-                    "scrollCollapse": false,
-                    "paging":         false
-                });
+                $("#productsGroup").DataTable();
             </script>
             ';
 define("AssetsJS", $tempAssetsJS);
